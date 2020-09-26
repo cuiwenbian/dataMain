@@ -1,0 +1,5 @@
+mongodb:
+  server: 127.0.0.1:27017
+  username: wenshuai
+  password: wenshuai
+  database: download
