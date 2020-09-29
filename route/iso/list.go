@@ -41,7 +41,10 @@ func List(c *gin.Context) {
 	// 把bson.D{{}}作为一个filter来匹配所有文档
 	// did, _ := primitive.ObjectIDFromHex("5f6f2d1eb983b3bfbe66e429")
 	// cur, err := collection.Find(context.TODO(), bson.D{{"_id", did}}, findOptions)
-	cur, err := collection.Find(context.TODO(), bson.D{{}}, findOptions)
+	cur, err := collection.Find(context.TODO(), bson.D{
+		{"cid", bson.D{{"$ne", ""}}}, // cid为空的去掉
+		{"size", bson.D{{"$gt", 0}}}, // size为空的去掉
+	}, findOptions)
 
 	if err != nil {
 		log.Fatal(err)

@@ -8,6 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
 
+	"github.com/gin-contrib/cors"
 	"github.com/guowenshuai/download/conf"
 	"github.com/guowenshuai/download/db"
 )
@@ -32,6 +33,7 @@ func main() {
 		logrus.Fatal(err.Error())
 	}
 	router := gin.Default()
+	router.Use(cors.Default())
 	router.Use(func(context *gin.Context) {
 		context.Set(db.MONGOCLIENT, mongoClient)
 		context.Set(conf.CONFIG, config)
